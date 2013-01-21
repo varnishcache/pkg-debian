@@ -27,6 +27,7 @@ case "$1" in
         fi
         
 	rm -f /etc/varnish/secret
+	dpkg-statoverride --remove /var/log/varnish || true
         ;;
 
     *)
