@@ -61,6 +61,13 @@ override_dh_installdocs:
 			$(CURDIR)/debian/varnish-doc/usr/share/doc/varnish-doc/html/_static/underscore.js; \
 	fi
 
+override_dh_gencontrol:
+	if [ -n "$$DEBIAN_OVERRIDE_BINARY_VERSION" ]; then \
+		dh_gencontrol -- -v$$DEBIAN_OVERRIDE_BINARY_VERSION; \
+	else \
+		dh_gencontrol ; \
+	fi
+
 # Override to add several init scripts
 override_dh_installinit:
 	dh_installinit -a
