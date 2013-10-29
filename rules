@@ -18,6 +18,8 @@ ifneq ($(filter $(DEB_HOST_ARCH),$(DISABLE_JEMALLOC_ARCH_LIST)),)
 LOCAL_CONFIGURE_FLAGS += --disable-jemalloc
 endif
 
+VMOD_ABI = $(shell printf '\#include "vmod_abi.h"\nVMOD_ABI_Version' | cpp - -Iinclude | sed '/^\#/D;s/"//g;s/\([A-Z]\)/\L\1/g;s/[^a-z0-9.]/-/g;s/varnish/varnishabi/')
+
 # Main build rule, leave everything to debhelper
 %:
 	dh $@ --parallel
@@ -62,10 +64,12 @@ override_dh_installdocs:
 	fi
 
 override_dh_gencontrol:
+	echo "Varnish:ABI=$(VMOD_ABI)" >> debian/substvars
+
 	if [ -n "$$DEBIAN_OVERRIDE_BINARY_VERSION" ]; then \
-		dh_gencontrol -- -v$$DEBIAN_OVERRIDE_BINARY_VERSION; \
+		dh_gencontrol -- -Tdebian/substvars -v$$DEBIAN_OVERRIDE_BINARY_VERSION; \
 	else \
-		dh_gencontrol ; \
+		dh_gencontrol -Tdebian/substvars; \
 	fi
 
 # Override to add several init scripts
