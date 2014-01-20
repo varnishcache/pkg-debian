@@ -27,7 +27,7 @@ Standards-Version: 3.9.3
 
 Package: varnish
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, gcc ( >= 3.3), libc6-dev | libc6.1-dev | libc-dev, adduser
+Depends: ${shlibs:Depends}, ${misc:Depends}, gcc (>= 3.3), libc6-dev | libc6.1-dev | libc-dev, adduser, libvarnishapi1 (>= ${binary:Version})
 Suggests: varnish-doc
 Replaces: libvarnishapi1 (<< 3.0.0-5)
 Provides: ${Varnish:ABI}
