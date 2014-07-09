@@ -12,14 +12,13 @@ Build-Depends:
  automake,
  autotools-dev,
  debhelper (>= 7.0.50~),
- groff-base,
  libedit-dev,
  libncurses-dev,
  libpcre3-dev,
  libtool,
  pkg-config,
  python-docutils,
- xsltproc,
+ python-sphinx,
 Vcs-Browser: http://git.debian.org/?p=pkg-varnish/pkg-varnish.git;a=summary
 Vcs-Git: git://git.debian.org/pkg-varnish/pkg-varnish.git
 Homepage: http://varnish-cache.org/
